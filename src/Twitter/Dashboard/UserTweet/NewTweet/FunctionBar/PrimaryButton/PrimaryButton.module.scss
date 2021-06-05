@@ -1,0 +1,15 @@
+.wrapper {
+  .button {
+    border: none;
+    border-radius: 9999px;
+    background-color: #1da1f2;
+    color: #ffffff;
+    min-height: 36px;
+    padding: 0 14px;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+      background-color: #1a91da;
+    }
+  }
+}

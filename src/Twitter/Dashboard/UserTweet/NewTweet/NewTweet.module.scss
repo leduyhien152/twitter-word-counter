@@ -1,0 +1,5 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: max-content min-content;
+  row-gap: 10px;
+}

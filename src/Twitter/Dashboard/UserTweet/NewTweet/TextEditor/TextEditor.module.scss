@@ -1,0 +1,18 @@
+.wrapper {
+  .textEditor {
+    border: 1px solid #ebeef0;
+    padding: 10px;
+    word-break: break-all;
+    white-space: pre-wrap;
+    line-height: 26px;
+    min-height: 26px;
+    font-size: 18px;
+    &:empty:before {
+      content: attr(data-placeholder);
+      color: gray;
+    }
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
