@@ -1,1 +1,4 @@
-export const MAX_LENGTH = 50;
+const MAX_LENGTH = 50;
+const STROKE_WIDTH = 3;
+
+export { MAX_LENGTH, STROKE_WIDTH };

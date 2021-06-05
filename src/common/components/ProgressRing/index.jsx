@@ -1,21 +1,20 @@
+import { MAX_LENGTH, STROKE_WIDTH } from "common/constants/Twitter";
+
 import styles from "./ProgressRing.module.scss";
 
-import { MAX_LENGTH } from "common/constants/Twitter";
-
-const ProgressRing = ({ size = 30, length = 0 }) => {
-  const STROKE_WIDTH = 3;
+const ProgressRing = ({ length = 0 }) => {
+  const isWarning = MAX_LENGTH - length <= 10 && MAX_LENGTH - length >= 0;
+  const isError = MAX_LENGTH - length < 0;
+  const color = (isError && "red") || (isWarning && "orange") || "blue";
+  const size = isError || isWarning ? 35 : 30;
 
   const radius = size / 2 - STROKE_WIDTH;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (length / MAX_LENGTH) * circumference;
 
-  const isWarning = MAX_LENGTH - length <= 10 && MAX_LENGTH - length >= 0;
-  const isError = MAX_LENGTH - length < 0;
-  const color = (isError && "red") || (isWarning && "orange") || "blue";
-
   return (
     <div className={styles.wrapper}>
-      <svg width={size} height={size}>
+      <svg width={size} height={size} key={size}>
         <circle
           className={styles.circle}
           stroke="#ebeef0"
