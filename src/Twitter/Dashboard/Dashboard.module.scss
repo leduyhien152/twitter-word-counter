@@ -1,0 +1,14 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: min-content min-content auto;
+  width: 600px;
+  border-left: 1px solid #ebeef0;
+  border-right: 1px solid #ebeef0;
+  background-color: #ffffff;
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    width: 100vw;
+  }
+}
