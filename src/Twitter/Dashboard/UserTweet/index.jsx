@@ -1,6 +1,6 @@
 import React from "react";
 
-import UserAvatar from "./UserAvatar";
+import UserAvatar from "common/components/UserAvatar";
 import NewTweet from "./NewTweet";
 
 import styles from "./UserTweet.module.scss";

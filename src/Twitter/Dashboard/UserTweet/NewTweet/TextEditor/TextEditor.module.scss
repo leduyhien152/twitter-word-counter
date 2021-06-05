@@ -1,4 +1,8 @@
 .wrapper {
+  .textEditorLine {
+    line-height: 26px;
+    min-height: 26px;
+  }
   .textEditor {
     border: 1px solid #ebeef0;
     padding: 10px;
@@ -14,5 +18,8 @@
     &:focus-visible {
       outline: none;
     }
+  }
+  .textHighlight {
+    background-color: #fd9bb0;
   }
 }
