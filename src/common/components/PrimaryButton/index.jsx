@@ -1,9 +1,9 @@
 import styles from "./PrimaryButton.module.scss";
 
-const PrimaryButton = () => {
+const PrimaryButton = ({ content }) => {
   return (
     <div className={styles.wrapper}>
-      <button className={styles.button}>Tweet</button>
+      <button className={styles.button}>{content}</button>
     </div>
   );
 };
