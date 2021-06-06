@@ -34,3 +34,19 @@ export const getTextSegments = (element) => {
   });
   return textSegments;
 };
+
+export const generateElement = ({
+  children,
+  startIndex,
+  endIndex,
+  className,
+}) => {
+  const element = document.createElement("span");
+  element.dataset.startIndex = startIndex;
+  element.dataset.endIndex = endIndex;
+  element.classList.add(className);
+  if (children && children.length) {
+    element.append(...children);
+  }
+  return element;
+};
