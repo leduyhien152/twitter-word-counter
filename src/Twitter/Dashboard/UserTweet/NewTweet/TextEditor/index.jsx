@@ -143,7 +143,9 @@ const TextEditor = ({ setNewTweet }) => {
           textEditorRef.current.innerHTML = "";
           setNewTweet("");
         }
+        break;
       }
+      default:
     }
   };
 
