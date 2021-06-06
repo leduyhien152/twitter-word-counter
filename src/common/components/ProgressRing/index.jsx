@@ -37,7 +37,9 @@ const ProgressRing = ({ length = 0 }) => {
         />
       </svg>
       {(isWarning || isError) && (
-        <div className={styles.number}>{MAX_LENGTH - length}</div>
+        <div className={styles.number} id="new-tweet-text-count">
+          {MAX_LENGTH - length}
+        </div>
       )}
     </div>
   );

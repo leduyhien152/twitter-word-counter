@@ -139,6 +139,7 @@ const TextEditor = ({ setTweet }) => {
     <div className={styles.wrapper}>
       <div
         ref={textEditorRef}
+        id="new-tweet-text-editor"
         className={styles.textEditor}
         contentEditable
         suppressContentEditableWarning
