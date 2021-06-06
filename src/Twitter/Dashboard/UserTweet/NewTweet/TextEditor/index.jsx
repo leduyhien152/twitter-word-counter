@@ -135,6 +135,17 @@ const TextEditor = ({ setTweet }) => {
     replaceChildren(children);
   };
 
+  const onKeyUp = (e) => {
+    switch (e.key) {
+      case "Backspace": {
+        const { textContent } = e.target;
+        if (!textContent || textContent === "\n") {
+          textEditorRef.current.innerHTML = "";
+        }
+      }
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <div
@@ -146,6 +157,7 @@ const TextEditor = ({ setTweet }) => {
         spellCheck={false}
         data-placeholder="What's happening?"
         onInput={onInput}
+        onKeyUp={onKeyUp}
       ></div>
     </div>
   );
