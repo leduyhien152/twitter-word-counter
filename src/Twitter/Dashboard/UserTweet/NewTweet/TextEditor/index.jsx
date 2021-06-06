@@ -5,7 +5,7 @@ import { getTextValue, getTextSegments } from "./utils";
 
 import styles from "./TextEditor.module.scss";
 
-const TextEditor = ({ setTweet }) => {
+const TextEditor = ({ setNewTweet }) => {
   const textEditorRef = useRef();
 
   const restoreSelection = (absoluteAnchorIndex, absoluteFocusIndex) => {
@@ -126,7 +126,7 @@ const TextEditor = ({ setTweet }) => {
       }
       currentIndex += text.length;
     });
-    setTweet(value);
+    setNewTweet(value);
     restoreSelection(anchorIndex, focusIndex);
   };
 
@@ -141,7 +141,7 @@ const TextEditor = ({ setTweet }) => {
         const { textContent } = e.target;
         if (!textContent || textContent === "\n") {
           textEditorRef.current.innerHTML = "";
-          setTweet("");
+          setNewTweet("");
         }
       }
     }
