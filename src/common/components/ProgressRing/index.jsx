@@ -1,16 +1,19 @@
-import { MAX_LENGTH, STROKE_WIDTH } from "common/constants/Twitter";
-
 import styles from "./ProgressRing.module.scss";
 
-const ProgressRing = ({ length = 0 }) => {
-  const isWarning = MAX_LENGTH - length <= 10 && MAX_LENGTH - length >= 0;
-  const isError = MAX_LENGTH - length < 0;
+const ProgressRing = ({ currentValue, maxValue }) => {
+  const STROKE_WIDTH = 3;
+  const NORMAL_SIZE = 30;
+  const ABNORMAL_SIZE = 35;
+
+  const isWarning =
+    maxValue - currentValue <= 10 && maxValue - currentValue >= 0;
+  const isError = maxValue - currentValue < 0;
   const color = (isError && "red") || (isWarning && "orange") || "blue";
-  const size = isError || isWarning ? 35 : 30;
+  const size = isError || isWarning ? ABNORMAL_SIZE : NORMAL_SIZE;
 
   const radius = size / 2 - STROKE_WIDTH;
   const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (length / MAX_LENGTH) * circumference;
+  const offset = circumference - (currentValue / maxValue) * circumference;
 
   return (
     <div className={styles.wrapper}>
@@ -38,7 +41,7 @@ const ProgressRing = ({ length = 0 }) => {
       </svg>
       {(isWarning || isError) && (
         <div className={styles.number} id="new-tweet-text-count">
-          {MAX_LENGTH - length}
+          {maxValue - currentValue}
         </div>
       )}
     </div>

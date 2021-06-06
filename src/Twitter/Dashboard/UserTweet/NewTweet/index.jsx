@@ -6,12 +6,12 @@ import FunctionBar from "./FunctionBar";
 import styles from "./NewTweet.module.scss";
 
 const NewTweet = () => {
-  const [tweet, setTweet] = useState("");
+  const [newTweet, setNewTweet] = useState("");
 
   return (
     <div className={styles.wrapper}>
-      <TextEditor setTweet={setTweet} />
-      <FunctionBar length={tweet.length} />
+      <TextEditor setNewTweet={setNewTweet} />
+      <FunctionBar newTweet={newTweet} />
     </div>
   );
 };

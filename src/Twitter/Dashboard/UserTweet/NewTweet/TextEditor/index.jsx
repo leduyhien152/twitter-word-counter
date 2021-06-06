@@ -5,7 +5,7 @@ import { getTextValue, getTextSegments } from "./utils";
 
 import styles from "./TextEditor.module.scss";
 
-const TextEditor = ({ setTweet }) => {
+const TextEditor = ({ setNewTweet }) => {
   const textEditorRef = useRef();
 
   const restoreSelection = (absoluteAnchorIndex, absoluteFocusIndex) => {
@@ -126,13 +126,27 @@ const TextEditor = ({ setTweet }) => {
       }
       currentIndex += text.length;
     });
-    setTweet(value);
+    setNewTweet(value);
     restoreSelection(anchorIndex, focusIndex);
   };
 
   const onInput = () => {
     const children = textEditorRef.current.childNodes;
     replaceChildren(children);
+  };
+
+  const onKeyUp = (e) => {
+    switch (e.key) {
+      case "Backspace": {
+        const { textContent } = e.target;
+        if (!textContent || textContent === "\n") {
+          textEditorRef.current.innerHTML = "";
+          setNewTweet("");
+        }
+        break;
+      }
+      default:
+    }
   };
 
   return (
@@ -146,6 +160,7 @@ const TextEditor = ({ setTweet }) => {
         spellCheck={false}
         data-placeholder="What's happening?"
         onInput={onInput}
+        onKeyUp={onKeyUp}
       ></div>
     </div>
   );
