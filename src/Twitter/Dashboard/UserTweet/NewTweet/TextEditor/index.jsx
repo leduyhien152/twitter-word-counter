@@ -139,6 +139,8 @@ const TextEditor = ({ setTweet }) => {
     <div className={styles.wrapper}>
       <div
         ref={textEditorRef}
+        aria-label="new-tweet-text-editor"
+        id="new-tweet-text-editor"
         className={styles.textEditor}
         contentEditable
         suppressContentEditableWarning
