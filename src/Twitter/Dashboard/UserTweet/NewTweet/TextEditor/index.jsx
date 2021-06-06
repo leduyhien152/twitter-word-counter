@@ -141,6 +141,7 @@ const TextEditor = ({ setTweet }) => {
         const { textContent } = e.target;
         if (!textContent || textContent === "\n") {
           textEditorRef.current.innerHTML = "";
+          setTweet("");
         }
       }
     }
