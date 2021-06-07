@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import { MAX_LENGTH } from "common/constants/Twitter";
-import { getTextValue, getTextSegments, generateElement } from "./utils";
+import { getTextSegments, generateElement } from "./utils";
 
 import styles from "./TextEditor.module.scss";
 
@@ -39,7 +39,7 @@ const TextEditor = ({ setNewTweet }) => {
   };
 
   const generateChildren = (element, currentIndex) => {
-    let text = getTextValue(element);
+    let text = element.textContent;
     if (!text) {
       text += "\n";
       const newLineElement = generateElement({
