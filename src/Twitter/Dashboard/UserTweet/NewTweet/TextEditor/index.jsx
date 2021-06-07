@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import { MAX_LENGTH } from "common/constants/Twitter";
-import { getTextValue, getTextSegments } from "./utils";
+import { getTextSegments, generateElement } from "./utils";
 
 import styles from "./TextEditor.module.scss";
 
@@ -39,40 +39,48 @@ const TextEditor = ({ setNewTweet }) => {
   };
 
   const generateChildren = (element, currentIndex) => {
-    const result = document.createElement("span");
-    let text = getTextValue(element);
-    const normalNode = document.createElement("span");
+    let text = element.textContent;
     if (!text) {
       text += "\n";
-      normalNode.appendChild(document.createTextNode("\n"));
-      normalNode.dataset.startIndex = currentIndex;
-      normalNode.dataset.endIndex = currentIndex + 1;
-      result.appendChild(normalNode);
-      result.dataset.startIndex = currentIndex;
-      result.dataset.endIndex = currentIndex + 1;
+      const newLineElement = generateElement({
+        children: ["\n"],
+        startIndex: currentIndex,
+        endIndex: currentIndex + 1,
+      });
+      const result = generateElement({
+        children: [newLineElement],
+        startIndex: currentIndex,
+        endIndex: currentIndex + 1,
+      });
       return { result, text };
     }
     if (!text.endsWith("\n") && element.nextSibling) text += "\n";
     const normalText = text.slice(0, Math.max(0, MAX_LENGTH - currentIndex));
-    normalNode.appendChild(document.createTextNode(normalText));
-    normalNode.dataset.startIndex = currentIndex;
-    normalNode.dataset.endIndex = currentIndex + normalText.length;
+    const normalElement = generateElement({
+      children: [normalText],
+      startIndex: currentIndex,
+      endIndex: currentIndex + normalText.length,
+    });
     if (MAX_LENGTH - currentIndex > text.length) {
-      result.appendChild(normalNode);
-      result.dataset.startIndex = currentIndex;
-      result.dataset.endIndex = currentIndex + normalText.length;
+      const result = generateElement({
+        children: [normalElement],
+        startIndex: currentIndex,
+        endIndex: currentIndex + normalText.length,
+      });
       return { result, text };
     }
-    const highlightNode = document.createElement("span");
     const highlightText = text.slice(Math.max(0, MAX_LENGTH - currentIndex));
-    highlightNode.dataset.startIndex = currentIndex + normalText.length;
-    highlightNode.dataset.endIndex = currentIndex + text.length;
-    highlightNode.classList.add(styles.textHighlight);
-    highlightNode.appendChild(document.createTextNode(highlightText));
-    result.appendChild(normalNode);
-    result.appendChild(highlightNode);
-    result.dataset.startIndex = currentIndex;
-    result.dataset.endIndex = currentIndex + text.length;
+    const highlightElement = generateElement({
+      children: [highlightText],
+      startIndex: currentIndex + normalText.length,
+      endIndex: currentIndex + text.length,
+      className: styles.textHighlight,
+    });
+    const result = generateElement({
+      children: [normalElement, highlightElement],
+      startIndex: currentIndex,
+      endIndex: currentIndex + text.length,
+    });
     return { result, text };
   };
 
